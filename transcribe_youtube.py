@@ -97,6 +97,9 @@ def get_raw_transcription_from_youtube_url(youtube_url):
     start_time = time.time()
     mp3_url = get_mp3_url_from_youtube(youtube_url)
     whisperresponse = transcribe_audio(mp3_url)
+
+    # if whiser fails then return err 
+    
     # print ("Time taken to transcribe (sec): ", time.time() - start_time)
     return whisperresponse['transcription']
 
@@ -110,7 +113,7 @@ def get_transcription_from_youtube_url(youtube_url):
     return {
         "title": title,
         "url": youtube_url,
-        "transcription": transcription
+        "content": transcription
     }
 
 
@@ -154,7 +157,7 @@ def get_transcriptions_from_youtube_playlist(playlist_url):
     Returns a list of dictionaries with the following keys:
     - title
     - url
-    - transcription
+    - content
     """
 
     start_time = time.time()
@@ -176,7 +179,7 @@ def get_transcriptions_from_youtube_playlist(playlist_url):
 
     # OPTIONAL: save to a csv file
     df = pd.DataFrame(transcriptions)
-    df.to_csv("{playlist_title}_transcriptions.csv", index=False)
+    df.to_csv(f"{playlist_title}_transcriptions.csv", index=False)
 
     # log the time taken, round to 2 decimal places
     print (f"\n===\nTime taken to transcribe Playlist '{playlist_title}' (sec): \n", round(time.time() - start_time, 2), "\n===")
@@ -188,14 +191,45 @@ def get_transcriptions_from_youtube_playlist(playlist_url):
 # # --- Run tests ---
 
 # %%
-single_video_transcription = get_transcription_from_youtube_url(TEST_URL)
-single_video_transcription
+# single_video_transcription = get_transcription_from_youtube_url(TEST_URL)
+# single_video_transcription
 
 # %%
-playlist_transcriptions = get_transcriptions_from_youtube_playlist(PLAYLIST_URL)
-playlist_transcriptions
+# # save that to a csv file
+
+# with open ("single_video_transcription.csv", "w") as f:
+#     f.write(single_video_transcription['transcription'])
 
 # %%
+# playlist_transcriptions = get_transcriptions_from_youtube_playlist(PLAYLIST_URL)
+# playlist_transcriptions
+
+# %%
+
+
+# %% [markdown]
+# # --- with Banana.dev ---
+
+# %%
+
+
+# %%
+from io import BytesIO
+import base64
+import banana_dev as banana
+
+api_key = "2782cbc2-5317-49e8-a7a3-eb5fcb308c9f"
+model_key = "b80a43e4-06ff-420e-9f74-1e099ee75755"
+
+# Expects an mp3 file named test.mp3 in directory
+with open(f'whisper.mp3', 'rb') as file:
+    mp3bytes = BytesIO(file.read())
+mp3 = base64.b64encode(mp3bytes.getvalue()).decode("ISO-8859-1")
+
+model_payload = {"mp3BytesString": mp3}
+
+out = banana.run(api_key, model_key, model_payload)
+print(out)
 
 
 

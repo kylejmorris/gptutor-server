@@ -7,8 +7,9 @@ import gunicorn
 
 import csv
 
+print ('importing from py script ')
 try: 
-    from transcribe_youtube import get_transcription_from_youtube_url, get_urls_from_youtube_playlist
+    from transcribe_youtube import get_transcription_from_youtube_url
 except Exception as e:
     print (f"ERROR: {e}")
 
