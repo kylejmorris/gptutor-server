@@ -38,9 +38,23 @@ playlist_transcriptions = get_transcriptions_from_youtube_playlist(PLAYLIST_URL)
 Returns a dict with `title`, `url`, and `transcription`
 
 
-Example: 
+# Usage
+## Post an article with text
+
+```
+curl -X POST http://127.0.0.1:5000/article
+   -H 'Content-Type: application/json'
+   -d '{"title": "Fierce Nerds", "url": "http://www.paulgraham.com/fn.html", "content": "Most people think of nerds as quiet, diffident people"}'
+```
+
+## Transcribe a video
 ```
 {'title': 'Deep Learning Maps Animal Movement',
  'url': 'https://www.youtube.com/watch?v=vaUy6zyJfwU',
  'transcription': ' We developed a new type of 3D deep learning approach that can take in normal color videos of behaving animals and behaving humans and then output the precise 3D locations of body landmarks so skeletal joints that you can track over time and thus provide a comprehensive description of how subjects are moving. This is a huge leap forward compared to a traditional motion capture system in which subjects need to wear highly invasive markers on the body. And then another big issue with motion captures that it requires that you have a clear line of sights to these markers and in a deep learning-based approach that we develop, we relieve this requirement.'}
  ```
+
+## Fetch your browsing data
+curl http://127.0.0.1:5000/getCSV
+
+ 
