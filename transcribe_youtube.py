@@ -3,7 +3,7 @@
 
 # %%
 PLAYLIST_URL = "https://www.youtube.com/playlist?list=PL9zq2zalZB1JRZsPtYeFVQAZkrDbZx3Qw" # My Learning Playlist 
-TEST_URL = "https://www.youtube.com/watch?v=vaUy6zyJfwU" # 1 minute video 
+TEST_URL = "https://www.youtube.com/watch?v=1AElONvi9WQ" # 1 minute video 
 
 WHISPER_MODEL_SIZE = "tiny"
 
