@@ -1,5 +1,14 @@
 # Whisper toolkit
 
+
+# flask server instructions
+
+`flask --app server run`
+
+
+
+
+# Youtube Transcription 
 ## --- How to use --- 
 
 Export notebook as `transcribe_youtube.py`, then import to use the key functions
