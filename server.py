@@ -25,7 +25,7 @@ print('Flask app created')
 # return the stored CSV 
 ############################
 @app.route("/getCSV", methods=["GET"])
-def getLocalCSV(request): 
+def getLocalCSV(): 
     print("Received request to get local CSV")
 
     # extract the request from the json 
@@ -64,7 +64,7 @@ def getLocalCSV(request):
 # send articles  {title, url, content}
 ############################
 @app.route("/article", methods=["POST"])
-def article(request):
+def article():
     print ('Received article Request')
 
     request_content = request.get_json(silent=True)
@@ -96,7 +96,7 @@ def article(request):
 # send youtube video URLs 
 ############################
 @app.route("/youtube", methods=["POST"])
-def youtube(request):
+def youtube():
     print ('Received youtube Request')
 
     request_content = request.get_json(silent=True)
@@ -129,7 +129,7 @@ def youtube(request):
 # test
 ############################
 @app.route("/test", methods=["GET","POST"])
-def test(request):
+def test():
     return "HI YOU FOUND ME" 
 
 ############################
